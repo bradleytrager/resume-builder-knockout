@@ -1,6 +1,11 @@
 var RESUME = {
 	name: "Bradley Trager",
 	title: "Web Developer",
+	email:"btrager@softfinity.com",
+	website:"http://www.softfinity.com",
+	phone:"	516-456-1277",
+	address1:"6665 Endinborough Dr",
+	address2:"West Bloomfield, MI 48322",
 	sections: [{
 			title: 'Experience',
 			items: [{

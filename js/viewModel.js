@@ -1,3 +1,4 @@
+
 function viewModel(resume){
 	var self = this;
 	self.resume = ko.mapping.fromJS(resume, resumeMapping);
@@ -6,16 +7,19 @@ function Resume(resume){
 	var self = this;
 	self.name = ko.observable(resume.name);
 	self.title = ko.observable(resume.title);
+	self.email = ko.observable(resume.email);
+	self.website = ko.observable(resume.website);
+	self.phone = ko.observable(resume.phone);
+	self.address1 = ko.observable(resume.address1);
+	self.address2 = ko.observable(resume.address2);
 	self.sections = ko.mapping.fromJS(resume.sections, sectionMapping);
 
-	self.isEditing = ko.observable(false);
 }
 function Section(section){
 	var self = this;
 	self.title = ko.observable(section.title);
 	self.items = ko.mapping.fromJS(section.items, itemMapping);
 
-	self.isEditing = ko.observable(false);
 }
 function Item(item){
 	var self = this;
@@ -24,13 +28,11 @@ function Item(item){
 	self.date = ko.observable(item.date);
 	self.details = ko.mapping.fromJS(item.details, detailMapping);
 
-	self.isEditing = ko.observable(false);
 }
 function Detail(detail){
 	var self = this;
 	self.detail = ko.observable(detail.detail);
 
-	self.isEditing = ko.observable(false);
 }
 var resumeMapping = {
 	create:function(options){
