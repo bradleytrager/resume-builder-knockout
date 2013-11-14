@@ -12,6 +12,7 @@ function Resume(resume){
 	self.phone = ko.observable(resume.phone);
 	self.address1 = ko.observable(resume.address1);
 	self.address2 = ko.observable(resume.address2);
+	self.summary = ko.observable(resume.summary);
 	self.sections = ko.mapping.fromJS(resume.sections, sectionMapping);
 
 }

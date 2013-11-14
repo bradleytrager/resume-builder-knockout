@@ -6,6 +6,7 @@ var RESUME = {
 	phone:"	516-456-1277",
 	address1:"6665 Endinborough Dr",
 	address2:"West Bloomfield, MI 48322",
+	summary:"Web Developer specializing in single-page web applications (SPA) and content management systems (CMS) using several back-end technologies including php, asp.net, java, ruby and nodejs.",
 	sections: [{
 			title: 'Experience',
 			items: [{
