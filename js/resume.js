@@ -36,11 +36,13 @@ var RESUME = {
 				items: [{
 					title: "Master of Engineering in Applied Physics",
 					location: "Cornell University, College of Engineering",
-					date: "August 2002 - May 2007"
+					date: "August 2002 - May 2007",
+					details:[]
 				}, {
 					title: "Bachelor of Religious Studies",
 					location: "Rabbinical College of America, Mayanot Institute",
-					date: "June 2007 - January 2012"
+					date: "June 2007 - January 2012",
+					details:[]
 				}]
 			},
 			{
