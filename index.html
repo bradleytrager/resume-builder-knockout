@@ -55,11 +55,16 @@
 			<div class="row">
 				<div class="col-xs-12 colums">
 					<p class="summary">
-					<span>
+						<span>
 							<span class="editable" data-bind="text:summary"></span>
 							<textarea class="editor col-xs-12 colums" type="text" data-bind="value:summary"></textarea>
 						</span>
 					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 colums">
+					<button class="addSection btn btn-primary btn-sm">Add Section</button>
 				</div>
 			</div>
 		</header>
@@ -71,6 +76,7 @@
 						<span class="section-title editable" data-bind="text:$data.title"></span>
 						<input class="editor col-xs-12 colums"  type="text" data-bind="value:$data.title">
 					</h2>
+					<button class="removeSection btn btn-danger btn-sm">Remove Section</button>
 				</div>
 				<!-- ko foreach:$data.items -->
 				<div class="col-xs-10 colums pull-right clearfix item">
@@ -118,14 +124,32 @@
 	}
 	function hideEdit(){
 		$(this).hide();
-					$(this).siblings('.editable').show();
+		$(this).siblings('.editable').show();
 	}
-		$(function(){
-			$('.editor').hide();
-			$('span.editable').on("click", showEdit);
-			$('a.editable').on("mouseenter", showEdit);
-			$('.editor').on("blur", hideEdit)
-		})
+	function addSection(){
+		var data = ko.dataFor(this);
+		//var context = ko.contextFor(this);
+		data.sections.push(new Section({title:"new section",items:[]}));
+		$('.editor').hide();
+	}
+	function removeSection(){
+		var data = ko.dataFor(this);
+		var context = ko.contextFor(this);
+		//context.remove(context.$data);
+		console.log(data);
+		console.log(context);
+		$('.editor').hide();
+	}
+	$(function(){
+		$('.editor').hide();
+		$('body').delegate('a.editable', 'click', function(event){
+			event.preventDefault();
+		});
+		$('body').delegate('.editable', 'dblclick', showEdit);
+		$('body').delegate('.editor', 'blur', hideEdit);
+		$('.addSection').on("click", addSection);
+		$('.removeSection').on("click", removeSection);
+	})
 	</script>
 </body>
 </html>
