@@ -98,32 +98,32 @@
 					<button class="removeSection btn btn-danger btn-sm">Remove Section</button>
 				</div>
 				<div data-bind="foreach:$data.items">
-				<div class="col-xs-10 colums pull-right clearfix item">
-					<div class="row">
-						<div class="col-xs-12 colums item-headline">
-							<span class="editable" data-bind="text:$data.title"></span>
-							<input class="editor col-xs-12 colums" type="text" data-bind="value:$data.title">
+					<div class="col-xs-10 colums pull-right clearfix item">
+						<div class="row">
+							<div class="col-xs-12 colums item-headline">
+								<span class="editable" data-bind="text:$data.title"></span>
+								<input class="editor col-xs-12 colums" type="text" data-bind="value:$data.title">
+							</div>
+							<div class="col-xs-12 colums item-location">
+								<span class="editable" data-bind="text:$data.location"></span>
+								<input class="editor col-xs-12 colums"  type="text" data-bind="value:$data.location">
+							</div>
+							<div class="col-xs-12 colums item-date" style="text-align:right;">
+								<span class="editable" data-bind="text:$data.date"></span>
+								<input class="editor col-xs-12 colums"  type="text" style="text-align:right;" data-bind="value:$data.date">
+							</div>
 						</div>
-						<div class="col-xs-12 colums item-location">
-							<span class="editable" data-bind="text:$data.location"></span>
-							<input class="editor col-xs-12 colums"  type="text" data-bind="value:$data.location">
-						</div>
-						<div class="col-xs-12 colums item-date" style="text-align:right;">
-							<span class="editable" data-bind="text:$data.date"></span>
-							<input class="editor col-xs-12 colums"  type="text" style="text-align:right;" data-bind="value:$data.date">
+						<div class="row">
+							<div class="col-xs-12 colums item-details">
+								<ul data-bind="sortable:$data.details">
+									<li class="detail">
+										<span class="editable" data-bind="text:$data.detail"></span>
+										<textarea class="editor col-xs-12 colums" type="text" data-bind="value:$data.detail"></textarea>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-xs-12 colums item-details">
-							<ul data-bind="sortable:$data.details">
-								<li class="detail">
-									<span class="editable" data-bind="text:$data.detail"></span>
-									<textarea class="editor col-xs-12 colums" type="text" data-bind="value:$data.detail"></textarea>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 				</div>
 			</div>
 		</section>
@@ -152,6 +152,11 @@
 		data.sections.push(new Section({title:"new section",items:[]}));
 		$('.editor').hide();
 	}
+	function add(element, parentName, object){
+		var data = ko.dataFor(element);
+		data[parentName].push(object);
+		$('.editor').hide();
+	}
 	function remove(element, parentName){
 		var context = ko.contextFor(element);
 		var parentArray = context.$parent[parentName];
@@ -165,9 +170,9 @@
 		});
 		$('body').delegate('.editable', 'dblclick', showEdit);
 		$('body').delegate('.editor', 'blur', hideEdit);
-		$('body').delegate('.addSection', 'click', addSection);
-		$('body').delegate('.removeSection', 'click', function(){
-			remove(this, 'sections');
+		$('body').delegate('.addSection', 'click', function(){
+			var newSection = new Section({title:"new section",items:[]});
+			add(this, 'sections', newSection);
 		});
 		$('body').delegate('.removeSection', 'click', function(){
 			remove(this, 'sections');
