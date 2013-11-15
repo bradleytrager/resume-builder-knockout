@@ -64,6 +64,7 @@ var RESUME = {
 						detail: "Concrete5, Wordpress, Magento"
 					}]
 				}, {
+					title: "Server-Side Frameworks",
 					details: [{
 						detail: "PHP, ASP.NET MVC, C#, Java, Node.js, Ruby"
 					}]
