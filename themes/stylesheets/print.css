@@ -1,0 +1,6 @@
+@media print {
+  /* line 2, ../sass/print.scss */
+  a[href]:after {
+    content: none !important;
+  }
+}

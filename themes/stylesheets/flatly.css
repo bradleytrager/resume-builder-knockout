@@ -8820,7 +8820,7 @@ td.visible-lg {
 }
 @media (min-width: 1200px) {
   /* line 7254, ../sass/flatly.scss */
-  .visible-lg 
+  .visible-lg {
     display: block !important;
   }
 
@@ -9329,38 +9329,4 @@ input[type="color"]:focus,
 /* line 7703, ../sass/flatly.scss */
 .affix {
   position: fixed;
-}
-
-@media print {
-  /* line 2, ../sass/print.scss */
-  a[href]:after {
-    content: none !important;
-  }
-}
-/* line 9, ../sass/styles.scss */
-header {
-  border-bottom: 1px solid #999999;
-  padding: 20px 0;
-}
-/* line 12, ../sass/styles.scss */
-header .title, header .name {
-  margin-top: 0;
-}
-/* line 15, ../sass/styles.scss */
-header .summary {
-  font-weight: bold;
-}
-
-/* line 20, ../sass/styles.scss */
-section {
-  border-bottom: 1px solid #eeeeee;
-  padding: 20px 0;
-}
-/* line 23, ../sass/styles.scss */
-section .section-title {
-  font-size: 20px;
-}
-/* line 26, ../sass/styles.scss */
-section .item-headline, section .item-date {
-  font-weight: bold;
 }

@@ -17,7 +17,6 @@
 						<span class="editable" data-bind="text:name"></span>
 						<input class="editor col-xs-12 colums" type="text" data-bind="value:name"/>
 					</h1>
-
 					<h2>
 						<span class="title text-muted editable" data-bind="text:title"></span>
 						<input class="editor col-xs-12 colums" type="text" data-bind="value:title"/>
@@ -50,7 +49,6 @@
 							<span class="editable" data-bind="text:address2"></span>
 							<input class="editor col-xs-12 colums" type="text" data-bind="value:address2"/>
 						</span>
-
 					</p>
 				</div>
 			</div>
@@ -59,13 +57,12 @@
 					<p class="summary">
 					<span>
 							<span class="editable" data-bind="text:summary"></span>
-							<input class="editor col-xs-12 colums" type="text" data-bind="value:summary"/>
+							<textarea class="editor col-xs-12 colums" type="text" data-bind="value:summary"></textarea>
 						</span>
 					</p>
 				</div>
 			</div>
 		</header>
-
 		<!-- ko foreach:sections -->
 		<section>
 			<div class="row">
@@ -96,14 +93,13 @@
 							<ul data-bind="foreach:$data.details">
 								<li>
 									<span class="editable" data-bind="text:$data.detail"></span>
-									<input class="editor col-xs-12 colums" type="text" data-bind="value:$data.detail">
+									<textarea class="editor col-xs-12 colums" type="text" data-bind="value:$data.detail"></textarea>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<!-- /ko -->
-
 			</div>
 		</section>
 		<!-- /ko -->

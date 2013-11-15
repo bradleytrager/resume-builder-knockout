@@ -8820,7 +8820,7 @@ td.visible-lg {
 }
 @media (min-width: 1200px) {
   /* line 7254, ../sass/flatly.scss */
-  .visible-lg 
+  .visible-lg {
     display: block !important;
   }
 

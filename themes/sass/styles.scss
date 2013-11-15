@@ -1,0 +1,29 @@
+@import 'flatly';
+@import 'print';
+$gray-darker:            lighten(#000, 13.5%); // #222
+$gray-dark:              lighten(#000, 20%);   // #333
+$gray:                   lighten(#000, 33.5%); // #555
+$gray-light:             lighten(#000, 60%);   // #999
+$gray-lighter:           lighten(#000, 93.5%); // #eee
+
+header{
+	border-bottom:1px solid $gray-light;
+	padding: 20px 0;
+	.title, .name{
+		margin-top: 0;
+	}
+	.summary{
+		font-weight: bold;
+	}
+} 
+
+section{
+	border-bottom:1px solid $gray-lighter;
+	padding: 20px 0;
+	.section-title{
+		font-size:20px;
+	}
+	.item-headline, .item-date{
+		font-weight: bold;
+	}
+}
