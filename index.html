@@ -3,9 +3,28 @@
 	<title>Resume Builder</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/app.css">
 	<style type="text/css">
-	input[type="text"]{
-		padding:0;
-	}
+		.editor{
+			display:none;
+		}
+		.detail{
+			cursor:move;
+		}
+		@media screen{
+			input[type="text"]{
+				padding:0;
+			}
+			.editable{
+				border:1px dotted blue;
+				min-width:30px;
+				min-height:30px;
+				display:inline-block;
+			}
+		}
+		@media print{
+			.btn{
+				display:none;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -14,7 +33,7 @@
 			<div class="row">
 				<div class="col-xs-8 colums headline">
 					<h1>
-						<span class="editable" data-bind="text:name"></span>
+						<span class="editable" data-bind="text:name"></span> 
 						<input class="editor col-xs-12 colums" type="text" data-bind="value:name"/>
 					</h1>
 					<h2>
@@ -78,7 +97,7 @@
 					</h2>
 					<button class="removeSection btn btn-danger btn-sm">Remove Section</button>
 				</div>
-				<!-- ko foreach:$data.items -->
+				<div data-bind="foreach:$data.items">
 				<div class="col-xs-10 colums pull-right clearfix item">
 					<div class="row">
 						<div class="col-xs-12 colums item-headline">
@@ -96,8 +115,8 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-12 colums item-details">
-							<ul data-bind="foreach:$data.details">
-								<li>
+							<ul data-bind="sortable:$data.details">
+								<li class="detail">
 									<span class="editable" data-bind="text:$data.detail"></span>
 									<textarea class="editor col-xs-12 colums" type="text" data-bind="value:$data.detail"></textarea>
 								</li>
@@ -105,51 +124,56 @@
 						</div>
 					</div>
 				</div>
-				<!-- /ko -->
+				</div>
 			</div>
 		</section>
 		<!-- /ko -->
 	</div>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/resume.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-debug.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.3.5/knockout.mapping.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout-sortable/0.8.1/knockout-sortable.min.js"></script>
 	<script type="text/javascript" src="js/viewModel.js"></script>
 	<script type="text/javascript">
-	function showEdit(){
-		$(this).hide();
-		$(this).siblings('.editor').show();
-		$(this).siblings('.editor').focus();	
-	}
-	function hideEdit(){
-		$(this).hide();
-		$(this).siblings('.editable').show();
-	}
-	function addSection(){
-		var data = ko.dataFor(this);
+		function showEdit(){
+			$(this).hide();
+			$(this).siblings('.editor').show();
+			$(this).siblings('.editor').focus();	
+		}
+		function hideEdit(){
+			$(this).hide();
+			$(this).siblings('.editable').show();
+		}
+		function addSection(){
+			var data = ko.dataFor(this);
 		//var context = ko.contextFor(this);
 		data.sections.push(new Section({title:"new section",items:[]}));
 		$('.editor').hide();
 	}
-	function removeSection(){
-		var data = ko.dataFor(this);
-		var context = ko.contextFor(this);
-		//context.remove(context.$data);
-		console.log(data);
-		console.log(context);
-		$('.editor').hide();
+	function remove(element, parentName){
+		var context = ko.contextFor(element);
+		var parentArray = context.$parent[parentName];
+		parentArray.remove(context.$data);
+		
 	}
 	$(function(){
-		$('.editor').hide();
+		//$('.editor').hide();
 		$('body').delegate('a.editable', 'click', function(event){
 			event.preventDefault();
 		});
 		$('body').delegate('.editable', 'dblclick', showEdit);
 		$('body').delegate('.editor', 'blur', hideEdit);
-		$('.addSection').on("click", addSection);
-		$('.removeSection').on("click", removeSection);
+		$('body').delegate('.addSection', 'click', addSection);
+		$('body').delegate('.removeSection', 'click', function(){
+			remove(this, 'sections');
+		});
+		$('body').delegate('.removeSection', 'click', function(){
+			remove(this, 'sections');
+		});
+
 	})
-	</script>
+</script>
 </body>
 </html>
