@@ -83,7 +83,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 colums">
-					<button class="addSection btn btn-primary btn-sm">Add Section</button>
+					<button class="addSection btn btn-primary btn-xs">Add Section</button>
 				</div>
 			</div>
 		</header>
@@ -95,7 +95,10 @@
 						<span class="section-title editable" data-bind="text:$data.title"></span>
 						<input class="editor col-xs-12 colums"  type="text" data-bind="value:$data.title">
 					</h2>
-					<button class="removeSection btn btn-danger btn-sm">Remove Section</button>
+					<div class="btn-group">
+					<button class="removeSection btn btn-danger btn-xs">Remove Section</button>
+					<button class="addItem btn btn-primary btn-xs">Add Item</button>
+				</div>
 				</div>
 				<div data-bind="foreach:$data.items">
 					<div class="col-xs-10 colums pull-right clearfix item">
@@ -115,10 +118,15 @@
 						</div>
 						<div class="row">
 							<div class="col-xs-12 colums item-details">
+								<div class="btn-group">
+								<button class="removeItem btn btn-danger btn-xs">Remove Item</button>
+								<button class="addDetail btn btn-primary btn-xs">Add Detail</button>
+							</div>
 								<ul data-bind="sortable:$data.details">
 									<li class="detail">
 										<span class="editable" data-bind="text:$data.detail"></span>
 										<textarea class="editor col-xs-12 colums" type="text" data-bind="value:$data.detail"></textarea>
+										<button class="removeDetail btn btn-danger btn-xs">Remove Detail</button>
 									</li>
 								</ul>
 							</div>
@@ -171,13 +179,26 @@
 		$('body').delegate('.editable', 'dblclick', showEdit);
 		$('body').delegate('.editor', 'blur', hideEdit);
 		$('body').delegate('.addSection', 'click', function(){
-			var newSection = new Section({title:"new section",items:[]});
+			var newSection = new Section(NEW_SECTION);
 			add(this, 'sections', newSection);
+		});
+		$('body').delegate('.addItem', 'click', function(){
+			var newItem = new Item(NEW_ITEM);
+			add(this, 'items', newItem);
+		});
+		$('body').delegate('.addDetail', 'click', function(){
+			var newDetail = new Detail(NEW_DETAIL);
+			add(this, 'details', newDetail);
 		});
 		$('body').delegate('.removeSection', 'click', function(){
 			remove(this, 'sections');
 		});
-
+		$('body').delegate('.removeItem', 'click', function(){
+			remove(this, 'items');
+		});
+		$('body').delegate('.removeDetail', 'click', function(){
+			remove(this, 'details');
+		});
 	})
 </script>
 </body>
