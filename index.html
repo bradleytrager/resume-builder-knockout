@@ -3,28 +3,28 @@
 	<title>Resume Builder</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/app.css">
 	<style type="text/css">
-		.editor{
+	.editor{
+		display:none;
+	}
+	.detail{
+		cursor:move;
+	}
+	@media screen{
+		input[type="text"]{
+			padding:0;
+		}
+		.editable{
+			border:1px dotted blue;
+			min-width:30px;
+			min-height:30px;
+			display:inline-block;
+		}
+	}
+	@media print{
+		.btn{
 			display:none;
 		}
-		.detail{
-			cursor:move;
-		}
-		@media screen{
-			input[type="text"]{
-				padding:0;
-			}
-			.editable{
-				border:1px dotted blue;
-				min-width:30px;
-				min-height:30px;
-				display:inline-block;
-			}
-		}
-		@media print{
-			.btn{
-				display:none;
-			}
-		}
+	}
 	</style>
 </head>
 <body>
@@ -96,9 +96,9 @@
 						<input class="editor col-xs-12 colums"  type="text" data-bind="value:$data.title">
 					</h2>
 					<div class="btn-group">
-					<button class="removeSection btn btn-danger btn-xs">Remove Section</button>
-					<button class="addItem btn btn-primary btn-xs">Add Item</button>
-				</div>
+						<button class="removeSection btn btn-danger btn-xs">Remove Section</button>
+						<button class="addItem btn btn-primary btn-xs">Add Item</button>
+					</div>
 				</div>
 				<div data-bind="foreach:$data.items">
 					<div class="col-xs-10 colums pull-right clearfix item">
@@ -119,9 +119,9 @@
 						<div class="row">
 							<div class="col-xs-12 colums item-details">
 								<div class="btn-group">
-								<button class="removeItem btn btn-danger btn-xs">Remove Item</button>
-								<button class="addDetail btn btn-primary btn-xs">Add Detail</button>
-							</div>
+									<button class="removeItem btn btn-danger btn-xs">Remove Item</button>
+									<button class="addDetail btn btn-primary btn-xs">Add Detail</button>
+								</div>
 								<ul data-bind="sortable:$data.details">
 									<li class="detail">
 										<span class="editable" data-bind="text:$data.detail"></span>
@@ -144,40 +144,20 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.3.5/knockout.mapping.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout-sortable/0.8.1/knockout-sortable.min.js"></script>
 	<script type="text/javascript" src="js/viewModel.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript">
-		function showEdit(){
-			$(this).hide();
-			$(this).siblings('.editor').show();
-			$(this).siblings('.editor').focus();	
-		}
-		function hideEdit(){
-			$(this).hide();
-			$(this).siblings('.editable').show();
-		}
-		function addSection(){
-			var data = ko.dataFor(this);
-		//var context = ko.contextFor(this);
-		data.sections.push(new Section({title:"new section",items:[]}));
-		$('.editor').hide();
-	}
-	function add(element, parentName, object){
-		var data = ko.dataFor(element);
-		data[parentName].push(object);
-		$('.editor').hide();
-	}
-	function remove(element, parentName){
-		var context = ko.contextFor(element);
-		var parentArray = context.$parent[parentName];
-		parentArray.remove(context.$data);
-		
-	}
+
 	$(function(){
-		//$('.editor').hide();
+		//Disable links for editing
 		$('body').delegate('a.editable', 'click', function(event){
 			event.preventDefault();
 		});
+
+		//Events for editing
 		$('body').delegate('.editable', 'dblclick', showEdit);
 		$('body').delegate('.editor', 'blur', hideEdit);
+
+		//Add and Remove events
 		$('body').delegate('.addSection', 'click', function(){
 			var newSection = new Section(NEW_SECTION);
 			add(this, 'sections', newSection);
@@ -200,6 +180,6 @@
 			remove(this, 'details');
 		});
 	})
-</script>
+	</script>
 </body>
 </html>
